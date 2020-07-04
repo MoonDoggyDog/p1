@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             Target target = collision.gameObject.GetComponent<Target>();
             target.TakeDamage(bulletDamage);
         }
-    }*/
+    }*//////
 
     private void OnCollisionEnter(Collision collision)
     {
