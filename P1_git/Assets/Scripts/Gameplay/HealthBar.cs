@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
+    public GameObject HB2;
+
     public Transform sthToFollow;
+
     public Vector3 HbOffset;
 
     private void Update()
