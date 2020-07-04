@@ -13643,7 +13643,7 @@ MonoBehaviour:
   currentPlayer1: 1
   readyToChangePlayer: 1
   playerChangeCDText: {fileID: 0}
-  rampOffset: {x: 0, y: 8, z: 0}
+  rampOffset: {x: 0, y: 6, z: 0}
   playerChangeCD: 0
 --- !u!4 &1132643463
 Transform:
