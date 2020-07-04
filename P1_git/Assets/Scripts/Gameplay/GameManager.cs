@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private GameObject baricade;
     private GameObject ramp;
     public GameObject rampPrefab;
+    public GameObject enemyPrefab;
+    public GameObject HBPrefab;
 
     public P1Shooting p1Shooting;
 
@@ -36,6 +38,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PlayerChange();
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameObject enemy = Instantiate(enemyPrefab, new Vector3(10, 5, 10), enemyPrefab.transform.rotation);
+            GameObject healthBar = Instantiate(HBPrefab, new Vector3(10, 5, 10), HBPrefab.transform.rotation);
+            healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
+        }
     }
 
     void PlayerChange()
