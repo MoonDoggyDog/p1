@@ -124,5 +124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints: 100
+  maxHP: 0
   explosionParticle: {fileID: 7934312802993576254, guid: 3ac8312c846910d42b949d977bad0ee3,
     type: 3}
+  gM: {fileID: 0}
+  healthBarScript: {fileID: 0}
+  hB: {fileID: 7848769656979182454, guid: 598ad3feaa68a0340966c954d67862fc, type: 3}

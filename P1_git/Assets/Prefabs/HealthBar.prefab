@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7848769656979182448}
   - component: {fileID: 7848769656979182455}
   m_Layer: 0
-  m_Name: HealthBar2
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sthToFollow: {fileID: 0}
+  HB2: {fileID: 7848769657230255254}
   HbOffset: {x: 2.7, y: 2.5, z: 2}
+  scale: 0.25
 --- !u!1 &7848769657230255253
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +110,7 @@ GameObject:
   - component: {fileID: 7848769657230255248}
   - component: {fileID: 7848769657230255255}
   m_Layer: 0
-  m_Name: HealthBar
+  m_Name: HealthBar2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

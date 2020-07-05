@@ -13,8 +13,12 @@ public class GameManager : MonoBehaviour
     public GameObject rampPrefab;
     public GameObject enemyPrefab;
     public GameObject HBPrefab;
+    public GameObject healthBar;
+    public GameObject Target;
 
-    public P1Shooting p1Shooting;
+    private P1Shooting p1Shooting;
+    private Target targetScript;
+    private HealthBar healthBarScript;
 
     public bool currentPlayer1 = true;
     public bool readyToChangePlayer = true;
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        targetScript = Target.GetComponent<Target>();
         Cursor.visible = false;
         p1Shooting = player1.GetComponent<P1Shooting>();
     }
@@ -42,7 +47,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject enemy = Instantiate(enemyPrefab, new Vector3(10, 5, 10), enemyPrefab.transform.rotation);
-            GameObject healthBar = Instantiate(HBPrefab, new Vector3(10, 5, 10), HBPrefab.transform.rotation);
+            healthBar = Instantiate(HBPrefab, new Vector3(10, 5, 10), HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
     }
