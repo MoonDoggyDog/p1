@@ -52,7 +52,8 @@ Preset:
   - target: {fileID: 0}
     propertyPath: bulletPrefab
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 8956712107097762371, guid: b09a342c9e90bed43be647db07cf615c,
+      type: 3}
   - target: {fileID: 0}
     propertyPath: gunsInHand.Array.size
     value: 4
@@ -76,7 +77,8 @@ Preset:
   - target: {fileID: 0}
     propertyPath: laserParticle
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 6652427835831280697, guid: f5e512a093e4ebd42abacfb9002540b1,
+      type: 3}
   - target: {fileID: 0}
     propertyPath: laserPartToDestroy
     value: 
@@ -103,11 +105,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: laserCurrentDamageDeal
-    value: 0
+    value: 50
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: pistolShootCd
-    value: 0
+    value: 1.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: pistolShootForse
