@@ -8,39 +8,82 @@ public class ShootingManager : MonoBehaviour
 
     public GameObject FirePoint, GameManagerScriptTo, bulletPrefab;
 
+    private GameObject laserInHand, pistolInHand, circleInHand, rocketInHand;
+    public GameObject[] gunsInHand = new GameObject[4] ;
+
     private GameManager managerScript;
 
     public ParticleSystem laserParticle, laserPartToDestroy;
 
     private LineRenderer lineRenderer;
 
-    public bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
+    public bool[] readyToShoot;
+    private bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
     public bool canShoot = true;
 
-    public float lasershootCD, laserpartOf, laserCurrentDamageDeal;
-    public float pistolShootForse = 100;
-
+    private bool laserGun, pistolGun, circleGun, rocketGun;
     public bool[] guns;
-    public bool laserGun, pistolGun, circleGun, rocketGun;
+
+    public float lasershootCD, laserpartOf, laserCurrentDamageDeal, pistolShootCd;
+    public float pistolShootForse = 100;
 
     private void Update()
     {
         LaserShot();
         PistolShot();
+        
     }
 
     private void Start()
     {
-        bool[] guns = new bool[4] {laserGun, pistolGun, circleGun, rocketGun};
+        //gunsInHand = new GameObject[4] /*{ laserInHand, pistolInHand, circleInHand, rocketInHand}*/;
+
+        guns = new bool[4] {laserGun = false, pistolGun = false, circleGun = false, rocketGun = false };
+        for(int i = 0; i < guns.Length; i++) { guns[i] = false; }
+
+        readyToShoot = new bool[4] { laserReadyToShoot, pistolReadyToShoot, circleReadyToShoot, rocketReadyToShoot };
+        for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
 
         managerScript = GameManagerScriptTo.GetComponent<GameManager>();
         lineRenderer = GetComponent<LineRenderer>();
         laserPartToDestroy = Instantiate(laserParticle);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("kek");
+        if (other.CompareTag("laser"))
+        //if (other.name == "laserGo")
+        {
+            //Debug.Log("keklaser");
+            //Debug.Log(guns.Length);
+            for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
+            for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
+            for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false);  }
+            guns[0] = true;
+            readyToShoot[0] = true;
+            Destroy(other.gameObject);
+            gunsInHand[0].SetActive(true);
+        }
+
+        if (other.gameObject.CompareTag("pistol"))
+        //if (other.name == "pistolGo")
+        {
+            //Debug.Log("kekois");
+            for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
+            for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
+            for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false); }
+            guns[1] = true;
+            readyToShoot[1] = true;
+            Destroy(other.gameObject);
+            gunsInHand[1].SetActive(true);
+        }    
+        
+    }
+
     public void LaserShot()
     {
-        if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && laserReadyToShoot && canShoot && laserGun)
+        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ guns[0] && canShoot && readyToShoot[0])
         {
             ///p1Shoot();
             RaycastHit hitInfo;
@@ -74,19 +117,19 @@ public class ShootingManager : MonoBehaviour
     }
     public void PistolShot()
     {
-        if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && pistolReadyToShoot && pistolGun && canShoot)
+        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
         {
             GameObject bullet = Instantiate(bulletPrefab, FirePoint.transform.position, FirePoint.transform.rotation);
             Rigidbody bulRB = bullet.GetComponent<Rigidbody>();
             bulRB.AddForce(FirePoint.transform.forward * pistolShootForse, ForceMode.Impulse);
-            pistolReadyToShoot = false;
+            readyToShoot[1] = false;
             StartCoroutine(shootCd());
         }
 
         IEnumerator shootCd()
         {
-            yield return new WaitForSeconds(0.2f);
-            pistolReadyToShoot = true;
+            yield return new WaitForSeconds(pistolShootCd);
+            readyToShoot[1] = true;
         }
     }
 }

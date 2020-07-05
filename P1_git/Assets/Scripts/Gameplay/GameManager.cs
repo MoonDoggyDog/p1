@@ -11,10 +11,17 @@ public class GameManager : MonoBehaviour
     private GameObject baricade;
     private GameObject ramp;
     public GameObject rampPrefab;
-    public GameObject enemyPrefab;
+
+    //debug
+    public GameObject enemyPrefabPrism;
+    public GameObject enemyPrefabCube;
     public GameObject HBPrefab;
     public GameObject healthBar;
     public GameObject Target;
+    public GameObject laserPrefab;
+    public GameObject pistolPrefab;
+
+    //debug end
 
     private P1Shooting p1Shooting;
     private Target targetScript;
@@ -43,15 +50,36 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PlayerChange();
+        DebugActions();
+    }
 
+    void DebugActions()
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject enemy = Instantiate(enemyPrefab, enemySpawnPoint, enemyPrefab.transform.rotation);
+            GameObject enemy = Instantiate(enemyPrefabCube, enemySpawnPoint, enemyPrefabCube.transform.rotation);
             healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameObject enemyprism = Instantiate(enemyPrefabPrism, enemySpawnPoint, enemyPrefabPrism.transform.rotation);
+            healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
+            healthBar.GetComponent<HealthBar>().sthToFollow = enemyprism.transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameObject laser = Instantiate(laserPrefab, new Vector3(-10, 1, -20), laserPrefab.transform.rotation);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject laser = Instantiate(pistolPrefab, new Vector3(10, 1, -20), pistolPrefab.transform.rotation);
+
+        }
+    }
     void PlayerChange()
     {
         if (Input.GetKeyDown(KeyCode.F) && currentPlayer1 && readyToChangePlayer)

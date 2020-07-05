@@ -39,15 +39,16 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Target"))
+        {
+            Target target = collision.gameObject.GetComponent<Target>();
+            target.TakeDamage(bulletDamage);
+            //Debug.Log("отдано");
+        }
         ParticleSystem bb = Instantiate(bulletBum, transform.position, bulletBum.transform.rotation);
         Destroy(bb.gameObject, 2);
         Destroy(gameObject);
         bulletTale.Stop();
         Destroy(bulletTale.gameObject, 2);
-        if (collision.gameObject.CompareTag("Target"))
-        {
-            Target target = collision.gameObject.GetComponent<Target>();
-            target.TakeDamage(bulletDamage);
-        }
     }
 }    

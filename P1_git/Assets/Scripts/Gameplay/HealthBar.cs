@@ -15,6 +15,8 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
+        if (sthToFollow)
+        {
             Vector3 sthPos = sthToFollow.position + HbOffset;
             Vector3 smoothP1Pos = Vector3.Lerp(transform.position, sthPos, 0.13f);
             transform.position = smoothP1Pos;
@@ -22,6 +24,7 @@ public class HealthBar : MonoBehaviour
             sthMaxHp = sthToFollow.gameObject.GetComponent<Target>().maxHP;
             scale = sthHP / sthMaxHp;
             HB2.transform.localScale = new Vector3(scale, 1, 1);
+        }
     }
 
     /*public void ChangeHP()
