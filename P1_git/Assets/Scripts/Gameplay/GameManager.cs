@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
     public GameObject Target;
     public GameObject laserPrefab;
     public GameObject pistolPrefab;
+    public CDBarScript cdbarScript;
 
     //debug end
 
-    private P1Shooting p1Shooting;
     private Target targetScript;
     private HealthBar healthBarScript;
 
@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
     {
         targetScript = Target.GetComponent<Target>();
         Cursor.visible = false;
-        p1Shooting = player1.GetComponent<P1Shooting>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        cdbarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         PlayerChange();
         DebugActions();
     }
@@ -89,9 +89,9 @@ public class GameManager : MonoBehaviour
             currentPlayer1 = false;
             readyToChangePlayer = false;
             StartCoroutine(PlayerChangeCD());
+            cdbarScript.AddABar("PlayerChangeCD");
             player2.transform.position = player1.transform.position + new Vector3(0, 4, 0);
             ReplaceP1WithBoost();
-            p1Shooting.p1ReadyToShoot = true;
         }
         else if (Input.GetKeyDown(KeyCode.F) && !currentPlayer1 && readyToChangePlayer)
         {
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
             currentPlayer1 = true;
             readyToChangePlayer = false;
             StartCoroutine(PlayerChangeCD());
+            cdbarScript.AddABar("PlayerChangeCD");
             player1.transform.position = player2.transform.position;
             ReplaceP2WithBaricade();
         }

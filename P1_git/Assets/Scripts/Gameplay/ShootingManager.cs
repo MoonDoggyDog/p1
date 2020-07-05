@@ -12,6 +12,7 @@ public class ShootingManager : MonoBehaviour
     public GameObject[] gunsInHand = new GameObject[4] ;
 
     private GameManager managerScript;
+    private CDBarScript cDBarScript;
 
     public ParticleSystem laserParticle, laserPartToDestroy;
 
@@ -36,6 +37,7 @@ public class ShootingManager : MonoBehaviour
 
     private void Start()
     {
+        cDBarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         //gunsInHand = new GameObject[4] /*{ laserInHand, pistolInHand, circleInHand, rocketInHand}*/;
 
         guns = new bool[4] {laserGun = false, pistolGun = false, circleGun = false, rocketGun = false };
@@ -115,6 +117,44 @@ public class ShootingManager : MonoBehaviour
             laserPartToDestroy.Stop();
         }
     }
+
+    ///Если нада лазером стрелять раз в ... сек
+    /*void p1Shoot()
+    {
+        RaycastHit hitInfo;
+
+        Ray ray = new Ray(p1FirePoint.transform.position,p1FirePoint.transform.forward);
+        //Debug.DrawRay(p1FirePoint.transform.position, p1FirePoint.transform.forward * 1000);
+        if(Physics.Raycast(ray, out hitInfo))
+        {
+            Debug.Log(hitInfo.transform.name);
+
+            Target targetScript = hitInfo.transform.GetComponent<Target>();
+            if(targetScript != null)
+            {
+                targetScript.TakeDamage(currentDamageDeal);
+            }
+        }
+
+        ParticleSystem laserPartToDestroy = Instantiate(laserParticle, hitInfo.point, laserParticle.transform.rotation);
+
+        lineRenderer.SetPosition(0, p1FirePoint.transform.position);
+        lineRenderer.SetPosition(1, hitInfo.point);
+
+        p1ReadyToShoot = false;
+        StartCoroutine(p1ShootCD());
+    }
+
+    private IEnumerator p1ShootCD()
+    {
+        yield return new WaitForSeconds(shootCD / partOf);
+        lineRenderer.SetPosition(0, new Vector3(0, -1, 0));
+        lineRenderer.SetPosition(1, new Vector3(0, -1, 0));
+
+        yield return new WaitForSeconds((shootCD / partOf) * (partOf - 1));
+        p1ReadyToShoot = true;
+    }*///
+
     public void PistolShot()
     {
         if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
@@ -124,6 +164,7 @@ public class ShootingManager : MonoBehaviour
             bulRB.AddForce(FirePoint.transform.forward * pistolShootForse, ForceMode.Impulse);
             readyToShoot[1] = false;
             StartCoroutine(shootCd());
+            cDBarScript.AddABar("PistolCD");
         }
 
         IEnumerator shootCd()
