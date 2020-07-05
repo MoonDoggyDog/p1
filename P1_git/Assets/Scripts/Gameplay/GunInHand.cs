@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guns : MonoBehaviour
+public class GunInHand : MonoBehaviour
 {
-    private P1Shooting readytoshootscript;
+    public ShootingManager shootingManagerScript;
 
     public bool isColide;
-    private void Start()
-    {
-         readytoshootscript = GameObject.Find("Player1").GetComponent<P1Shooting>();
-    }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Baricade"))
         {
             isColide = true;
-            readytoshootscript.canShoot = false;
+            shootingManagerScript.canShoot = false;
         }
     }
 
@@ -26,7 +22,7 @@ public class Guns : MonoBehaviour
         if (other.CompareTag("Baricade"))
         {
             isColide = false;
-            readytoshootscript.canShoot = true;
+            shootingManagerScript.canShoot = true;
         }
     }
 }

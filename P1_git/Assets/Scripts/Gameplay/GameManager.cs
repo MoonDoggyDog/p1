@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public Text playerChangeCDText;
 
-    public Vector3 rampOffset;
+    public Vector3 rampOffset, enemySpawnPoint;
 
     public float playerChangeCD;
 
@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject enemy = Instantiate(enemyPrefab, new Vector3(10, 5, 10), enemyPrefab.transform.rotation);
-            healthBar = Instantiate(HBPrefab, new Vector3(10, 5, 10), HBPrefab.transform.rotation);
+            GameObject enemy = Instantiate(enemyPrefab, enemySpawnPoint, enemyPrefab.transform.rotation);
+            healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
     }
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             readyToChangePlayer = false;
             StartCoroutine(PlayerChangeCD());
             player2.transform.position = player1.transform.position + new Vector3(0, 4, 0);
-            ReplaceP2WithBoost();
+            ReplaceP1WithBoost();
             p1Shooting.p1ReadyToShoot = true;
         }
         else if (Input.GetKeyDown(KeyCode.F) && !currentPlayer1 && readyToChangePlayer)
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         Destroy(ramp);
     }
 
-    void ReplaceP2WithBoost()
+    void ReplaceP1WithBoost()
     { 
         player1.SetActive(false);
         player2.SetActive(true);
