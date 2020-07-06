@@ -6,6 +6,8 @@ public class CDBarScript : MonoBehaviour
 {
     private bool[] sequence = new bool[3];
 
+    public bool AddLaserShotCDIsKeyDown;
+
     public GameObject[] CDBarGameObjects = new GameObject[4];
     public GameObject player1;
     public GameObject player2;
@@ -15,7 +17,7 @@ public class CDBarScript : MonoBehaviour
 
     public Vector3 offset;
 
-    public float numAddPlayerChangeCD = 0, numAddPistolCd = 0;
+    public float numAddPlayerChangeCD = 0, numAddPistolCd = 0, numAddLaserCD = 0;
 
     private void Start()
     {
@@ -24,12 +26,16 @@ public class CDBarScript : MonoBehaviour
         //sequence[] =  {false, false, false};
         //CDBarGameObjects = new GameObject[4];
         for(int i = 0; i < CDBarGameObjects.Length - 1; i++) { CDBarGameObjects[i].SetActive(false); }
+        numAddLaserCD = shootingManager.laserOverLoadCD;
     }
 
     private void Update()
     {
         AddPlayerChangeCD();
         AddPistolCd();
+        AddLaserCD();
+
+        CDBarGameObjects[2].transform.localScale = new Vector3(numAddLaserCD / shootingManager.laserOverLoadCD, 1, 1);
     }
 
     private void FixedUpdate()
@@ -66,6 +72,17 @@ public class CDBarScript : MonoBehaviour
             numAddPistolCd = shootingManager.pistolShootCd;
             CDBarGameObjects[0].SetActive(true);
        }
+
+       if(bar == "laserShotCDDown")
+       {
+            AddLaserShotCDIsKeyDown = true;
+            CDBarGameObjects[2].SetActive(true);
+       }else if(bar == "laserShotCDUp")
+       {
+            AddLaserShotCDIsKeyDown = false;
+            //CDBarGameObjects[2].SetActive(false);
+       }
+
     }
 
     void AddPlayerChangeCD()
@@ -91,6 +108,25 @@ public class CDBarScript : MonoBehaviour
         else
         {
             CDBarGameObjects[0].SetActive(false);
+        }
+    }
+
+    void AddLaserCD()
+    {
+        if(AddLaserShotCDIsKeyDown && numAddLaserCD > 0)
+        {
+            numAddLaserCD -= Time.deltaTime;
+        }
+        else if(numAddLaserCD <= 0)
+        {
+            //AddLaserShotCDIsKeyDown = false;
+            StartCoroutine(shootingManager.LaserOverload());
+        }
+        if(!AddLaserShotCDIsKeyDown && numAddLaserCD  < shootingManager.laserOverLoadCD)
+        {
+
+            numAddLaserCD += Time.deltaTime;
+            CDBarGameObjects[2].SetActive(true);
         }
     }
 }

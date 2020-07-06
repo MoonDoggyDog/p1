@@ -3192,8 +3192,9 @@ MonoBehaviour:
   laserPartToDestroy: {fileID: 0}
   readyToShoot: 
   canShoot: 1
+  lasCanShoot: 1
   guns: 
-  lasershootCD: 0
+  laserOverLoadCD: 0
   laserpartOf: 0
   laserCurrentDamageDeal: 50
   pistolShootCd: 1.5
@@ -15686,8 +15687,9 @@ MonoBehaviour:
   laserPartToDestroy: {fileID: 0}
   readyToShoot: 
   canShoot: 1
+  lasCanShoot: 1
   guns: 
-  lasershootCD: 0
+  laserOverLoadCD: 3
   laserpartOf: 0
   laserCurrentDamageDeal: 50
   pistolShootCd: 1.5
@@ -16971,12 +16973,12 @@ PrefabInstance:
     - target: {fileID: 3972776924557394703, guid: 566b201b9c9eba449a2570b34549eb39,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7745441594058704929, guid: 566b201b9c9eba449a2570b34549eb39,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566b201b9c9eba449a2570b34549eb39, type: 3}

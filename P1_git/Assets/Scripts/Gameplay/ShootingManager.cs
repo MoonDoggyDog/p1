@@ -20,12 +20,12 @@ public class ShootingManager : MonoBehaviour
 
     public bool[] readyToShoot;
     private bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
-    public bool canShoot = true;
+    public bool canShoot = true, lasCanShoot = true;
 
     private bool laserGun, pistolGun, circleGun, rocketGun;
     public bool[] guns;
 
-    public float lasershootCD, laserpartOf, laserCurrentDamageDeal, pistolShootCd;
+    public float laserOverLoadCD, laserpartOf, laserCurrentDamageDeal, pistolShootCd;
     public float pistolShootForse = 100;
 
     private void Update()
@@ -85,11 +85,12 @@ public class ShootingManager : MonoBehaviour
 
     public void LaserShot()
     {
-        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ guns[0] && canShoot && readyToShoot[0])
+        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ guns[0] && canShoot && readyToShoot[0] && lasCanShoot)
         {
             ///p1Shoot();
             RaycastHit hitInfo;
 
+            cDBarScript.AddABar("laserShotCDDown");
 
             Ray ray = new Ray(FirePoint.transform.position, FirePoint.transform.forward);
 
@@ -111,12 +112,20 @@ public class ShootingManager : MonoBehaviour
         }
         else
         {
-
+            cDBarScript.AddABar("laserShotCDUp");
             lineRenderer.SetPosition(0, new Vector3(0, -1, 0));
             lineRenderer.SetPosition(1, new Vector3(0, -1, 0));
             laserPartToDestroy.Stop();
         }
     }
+
+    public IEnumerator LaserOverload()
+    {
+        lasCanShoot = false;
+        yield return new WaitForSeconds(3);
+        lasCanShoot = true;
+    }
+
 
     ///Если нада лазером стрелять раз в ... сек
     /*void p1Shoot()
