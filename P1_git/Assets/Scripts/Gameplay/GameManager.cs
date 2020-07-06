@@ -11,10 +11,8 @@ public class GameManager : MonoBehaviour
     private GameObject baricade;
     private GameObject ramp;
     public GameObject rampPrefab;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
+
+    public GameObject currentPlayerGameObj;
 
     //debug
     public GameObject enemyPrefabPrism;
@@ -27,15 +25,11 @@ public class GameManager : MonoBehaviour
     public CDBarScript cdbarScript;
 
     //debug end
-=======
-    public GameObject enemyPrefab;
-    public GameObject HBPrefab;
-    public GameObject healthBar;
-    public GameObject Target;
->>>>>>> parent of a9e0f2e... 2 перса стриляют
 
     private Target targetScript;
     private HealthBar healthBarScript;
+    private ShootingManager shootingManager;
+    
 
     public bool currentPlayer1 = true;
     public bool readyToChangePlayer = true;
@@ -51,6 +45,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentPlayerGameObj = player1;
         targetScript = Target.GetComponent<Target>();
         Cursor.visible = false;
     }
@@ -60,41 +55,72 @@ public class GameManager : MonoBehaviour
     {
         cdbarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         PlayerChange();
-<<<<<<< HEAD
         DebugActions();
+        shootingManager = currentPlayerGameObj.GetComponent<ShootingManager>();
     }
-=======
->>>>>>> parent of a9e0f2e... 2 перса стриляют
 
+    void DebugActions()
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject enemy = Instantiate(enemyPrefab, enemySpawnPoint, enemyPrefab.transform.rotation);
+            GameObject enemy = Instantiate(enemyPrefabCube, enemySpawnPoint, enemyPrefabCube.transform.rotation);
             healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameObject enemyprism = Instantiate(enemyPrefabPrism, enemySpawnPoint, enemyPrefabPrism.transform.rotation);
+            healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
+            healthBar.GetComponent<HealthBar>().sthToFollow = enemyprism.transform;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameObject laser = Instantiate(laserPrefab, new Vector3(-10, 1, -20), laserPrefab.transform.rotation);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameObject laser = Instantiate(pistolPrefab, new Vector3(10, 1, -20), pistolPrefab.transform.rotation);
+
+        }
+    }
     void PlayerChange()
     {
         if (Input.GetKeyDown(KeyCode.F) && currentPlayer1 && readyToChangePlayer)
         {
+            currentPlayerGameObj = player2;
+            shootingManager.readyToShoot[1] = true;
+
             player1.GetComponent<PlayersMovement>().enabled = false;
             player2.GetComponent<PlayersMovement>().enabled = true;
+
             currentPlayer1 = false;
             readyToChangePlayer = false;
+
             StartCoroutine(PlayerChangeCD());
+
             cdbarScript.AddABar("PlayerChangeCD");
+
             player2.transform.position = player1.transform.position + new Vector3(0, 4, 0);
             ReplaceP1WithBoost();
         }
         else if (Input.GetKeyDown(KeyCode.F) && !currentPlayer1 && readyToChangePlayer)
         {
+            currentPlayerGameObj = player1;
+            shootingManager.readyToShoot[1] = true;
+
             player1.GetComponent<PlayersMovement>().enabled = true;
             player2.GetComponent<PlayersMovement>().enabled = false;
+
             currentPlayer1 = true;
             readyToChangePlayer = false;
+
             StartCoroutine(PlayerChangeCD());
+
             cdbarScript.AddABar("PlayerChangeCD");
+
             player1.transform.position = player2.transform.position;
             ReplaceP2WithBaricade();
         }

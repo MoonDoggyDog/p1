@@ -8,6 +8,9 @@ public class ShootingManager : MonoBehaviour
 
     public GameObject FirePoint, GameManagerScriptTo, bulletPrefab;
 
+    private GameObject laserInHand, pistolInHand, circleInHand, rocketInHand;
+    public GameObject[] gunsInHand = new GameObject[4] ;
+
     private GameManager managerScript;
     private CDBarScript cDBarScript;
 
@@ -15,35 +18,25 @@ public class ShootingManager : MonoBehaviour
 
     private LineRenderer lineRenderer;
 
-<<<<<<< HEAD
     public bool[] readyToShoot;
-    private bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
+    bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
     public bool canShoot = true, lasCanShoot = true;
 
     private bool laserGun, pistolGun, circleGun, rocketGun;
     public bool[] guns;
 
     public float laserOverLoadCD, laserpartOf, laserCurrentDamageDeal, pistolShootCd;
-=======
-    public bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
-    public bool canShoot = true;
-
-    public float lasershootCD, laserpartOf, laserCurrentDamageDeal;
->>>>>>> parent of a9e0f2e... 2 перса стриляют
     public float pistolShootForse = 100;
-
-    public bool[] guns;
-    public bool laserGun, pistolGun, circleGun, rocketGun;
 
     private void Update()
     {
         LaserShot();
         PistolShot();
+        
     }
 
     private void Start()
     {
-<<<<<<< HEAD
         cDBarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         //gunsInHand = new GameObject[4] /*{ laserInHand, pistolInHand, circleInHand, rocketInHand}*/;
 
@@ -52,22 +45,47 @@ public class ShootingManager : MonoBehaviour
 
         readyToShoot = new bool[4] { laserReadyToShoot, pistolReadyToShoot, circleReadyToShoot, rocketReadyToShoot };
         for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
-=======
-        bool[] guns = new bool[4] {laserGun, pistolGun, circleGun, rocketGun};
->>>>>>> parent of a9e0f2e... 2 перса стриляют
 
         managerScript = GameManagerScriptTo.GetComponent<GameManager>();
         lineRenderer = GetComponent<LineRenderer>();
         laserPartToDestroy = Instantiate(laserParticle);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("kek");
+        if (other.CompareTag("laser"))
+        //if (other.name == "laserGo")
+        {
+            //Debug.Log("keklaser");
+            //Debug.Log(guns.Length);
+            for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
+            for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
+            for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false);  }
+            guns[0] = true;
+            readyToShoot[0] = true;
+            Destroy(other.gameObject);
+            gunsInHand[0].SetActive(true);
+        }
+
+        if (other.gameObject.CompareTag("pistol"))
+        //if (other.name == "pistolGo")
+        {
+            //Debug.Log("kekois");
+            for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
+            for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
+            for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false); }
+            guns[1] = true;
+            readyToShoot[1] = true;
+            Destroy(other.gameObject);
+            gunsInHand[1].SetActive(true);
+        }    
+        
+    }
+
     public void LaserShot()
     {
-<<<<<<< HEAD
         if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ guns[0] && canShoot && readyToShoot[0] && lasCanShoot)
-=======
-        if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && laserReadyToShoot && canShoot && laserGun)
->>>>>>> parent of a9e0f2e... 2 перса стриляют
         {
             ///p1Shoot();
             RaycastHit hitInfo;
@@ -148,32 +166,20 @@ public class ShootingManager : MonoBehaviour
 
     public void PistolShot()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (Input.GetButton("Fire1") && readyToShoot[1] && guns[1] && canShoot)
-=======
-        if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && pistolReadyToShoot && pistolGun && canShoot)
->>>>>>> parent of a9e0f2e... 2 перса стриляют
-=======
-        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
->>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
-=======
-        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
->>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
         {
             GameObject bullet = Instantiate(bulletPrefab, FirePoint.transform.position, FirePoint.transform.rotation);
             Rigidbody bulRB = bullet.GetComponent<Rigidbody>();
             bulRB.AddForce(FirePoint.transform.forward * pistolShootForse, ForceMode.Impulse);
-            pistolReadyToShoot = false;
+            readyToShoot[1] = false;
             StartCoroutine(shootCd());
             cDBarScript.AddABar("PistolCD");
         }
 
         IEnumerator shootCd()
         {
-            yield return new WaitForSeconds(0.2f);
-            pistolReadyToShoot = true;
+            yield return new WaitForSeconds(pistolShootCd);
+            readyToShoot[1] = true;
         }
     }
 }
