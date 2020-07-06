@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55795cecb459b2f42b4ec734a1e5c2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamage: 90
+  bulletDamage: 40
   bulletTalePrefab: {fileID: 1169025668742031015, guid: 840c985732a3cb142bc76dcfe3b4c79c,
     type: 3}
   bulletTale: {fileID: 0}

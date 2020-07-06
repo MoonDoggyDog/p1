@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private GameObject baricade;
     private GameObject ramp;
     public GameObject rampPrefab;
+<<<<<<< HEAD
 
     public GameObject currentPlayerGameObj;
 
@@ -25,6 +26,12 @@ public class GameManager : MonoBehaviour
     public CDBarScript cdbarScript;
 
     //debug end
+=======
+    public GameObject enemyPrefab;
+    public GameObject HBPrefab;
+    public GameObject healthBar;
+    public GameObject Target;
+>>>>>>> parent of a9e0f2e... 2 перса стриляют
 
     private Target targetScript;
     private HealthBar healthBarScript;
@@ -55,37 +62,21 @@ public class GameManager : MonoBehaviour
     {
         cdbarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         PlayerChange();
+<<<<<<< HEAD
         DebugActions();
         shootingManager = currentPlayerGameObj.GetComponent<ShootingManager>();
     }
+=======
+>>>>>>> parent of a9e0f2e... 2 перса стриляют
 
-    void DebugActions()
-    {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            GameObject enemy = Instantiate(enemyPrefabCube, enemySpawnPoint, enemyPrefabCube.transform.rotation);
+            GameObject enemy = Instantiate(enemyPrefab, enemySpawnPoint, enemyPrefab.transform.rotation);
             healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameObject enemyprism = Instantiate(enemyPrefabPrism, enemySpawnPoint, enemyPrefabPrism.transform.rotation);
-            healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
-            healthBar.GetComponent<HealthBar>().sthToFollow = enemyprism.transform;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GameObject laser = Instantiate(laserPrefab, new Vector3(-10, 1, -20), laserPrefab.transform.rotation);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GameObject laser = Instantiate(pistolPrefab, new Vector3(10, 1, -20), pistolPrefab.transform.rotation);
-
-        }
     }
+
     void PlayerChange()
     {
         if (Input.GetKeyDown(KeyCode.F) && currentPlayer1 && readyToChangePlayer)

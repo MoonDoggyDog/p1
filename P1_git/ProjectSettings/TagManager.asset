@@ -7,9 +7,6 @@ TagManager:
   - Border
   - bullet
   - Baricade
-  - Target
-  - laser
-  - pistol
   layers:
   - Default
   - TransparentFX
