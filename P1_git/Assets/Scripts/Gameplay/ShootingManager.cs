@@ -150,10 +150,14 @@ public class ShootingManager : MonoBehaviour
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (Input.GetButton("Fire1") && readyToShoot[1] && guns[1] && canShoot)
 =======
         if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && pistolReadyToShoot && pistolGun && canShoot)
 >>>>>>> parent of a9e0f2e... 2 перса стриляют
+=======
+        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
 =======
         if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
 >>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)

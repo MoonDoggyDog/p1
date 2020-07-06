@@ -3119,8 +3119,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_RootOrder: 8
 <<<<<<< HEAD
+=======
+  m_RootOrder: 7
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
 =======
   m_RootOrder: 7
 >>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
@@ -3514,6 +3518,7 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+<<<<<<< HEAD
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &436961655
 GameObject:
@@ -3544,6 +3549,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+=======
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &521096248
 Mesh:
@@ -13691,7 +13698,10 @@ MonoBehaviour:
     type: 3}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   currentPlayerGameObj: {fileID: 0}
+=======
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
 =======
 >>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
   enemyPrefabPrism: {fileID: 783482887983270725, guid: 9b470c7504b198449aef6e6a4a7f781d,

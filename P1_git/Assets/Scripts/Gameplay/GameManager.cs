@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private GameObject ramp;
     public GameObject rampPrefab;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
 
     //debug
     public GameObject enemyPrefabPrism;
