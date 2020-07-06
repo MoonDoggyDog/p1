@@ -92,16 +92,12 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: lasCanShoot
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: guns.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: laserOverLoadCD
-    value: 3
+    propertyPath: lasershootCD
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: laserpartOf

@@ -17,7 +17,7 @@ public class ShootingManager : MonoBehaviour
 
 <<<<<<< HEAD
     public bool[] readyToShoot;
-    bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
+    private bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
     public bool canShoot = true, lasCanShoot = true;
 
     private bool laserGun, pistolGun, circleGun, rocketGun;
@@ -149,10 +149,14 @@ public class ShootingManager : MonoBehaviour
     public void PistolShot()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (Input.GetButton("Fire1") && readyToShoot[1] && guns[1] && canShoot)
 =======
         if (Input.GetButton("Fire1") && managerScript.currentPlayer1 && pistolReadyToShoot && pistolGun && canShoot)
 >>>>>>> parent of a9e0f2e... 2 перса стриляют
+=======
+        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
+>>>>>>> parent of 1e88a64... Для отката(начал делать один шутиг манагер)
         {
             GameObject bullet = Instantiate(bulletPrefab, FirePoint.transform.position, FirePoint.transform.rotation);
             Rigidbody bulRB = bullet.GetComponent<Rigidbody>();
