@@ -19,7 +19,7 @@ public class ShootingManager : MonoBehaviour
     private LineRenderer lineRenderer;
 
     public bool[] readyToShoot;
-    private bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
+    bool laserReadyToShoot = false, pistolReadyToShoot = false, circleReadyToShoot = false, rocketReadyToShoot = false;
     public bool canShoot = true, lasCanShoot = true;
 
     private bool laserGun, pistolGun, circleGun, rocketGun;
@@ -166,7 +166,7 @@ public class ShootingManager : MonoBehaviour
 
     public void PistolShot()
     {
-        if (Input.GetButton("Fire1") && /*managerScript.currentPlayer1 &&*/ readyToShoot[1] && guns[1] && canShoot)
+        if (Input.GetButton("Fire1") && readyToShoot[1] && guns[1] && canShoot)
         {
             GameObject bullet = Instantiate(bulletPrefab, FirePoint.transform.position, FirePoint.transform.rotation);
             Rigidbody bulRB = bullet.GetComponent<Rigidbody>();

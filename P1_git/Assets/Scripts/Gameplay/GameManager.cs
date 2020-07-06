@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private GameObject ramp;
     public GameObject rampPrefab;
 
+    public GameObject currentPlayerGameObj;
+
     //debug
     public GameObject enemyPrefabPrism;
     public GameObject enemyPrefabCube;
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private Target targetScript;
     private HealthBar healthBarScript;
+    private ShootingManager shootingManager;
+    
 
     public bool currentPlayer1 = true;
     public bool readyToChangePlayer = true;
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentPlayerGameObj = player1;
         targetScript = Target.GetComponent<Target>();
         Cursor.visible = false;
     }
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
         cdbarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
         PlayerChange();
         DebugActions();
+        shootingManager = currentPlayerGameObj.GetComponent<ShootingManager>();
     }
 
     void DebugActions()
@@ -84,23 +90,37 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && currentPlayer1 && readyToChangePlayer)
         {
+            currentPlayerGameObj = player2;
+            shootingManager.readyToShoot[1] = true;
+
             player1.GetComponent<PlayersMovement>().enabled = false;
             player2.GetComponent<PlayersMovement>().enabled = true;
+
             currentPlayer1 = false;
             readyToChangePlayer = false;
+
             StartCoroutine(PlayerChangeCD());
+
             cdbarScript.AddABar("PlayerChangeCD");
+
             player2.transform.position = player1.transform.position + new Vector3(0, 4, 0);
             ReplaceP1WithBoost();
         }
         else if (Input.GetKeyDown(KeyCode.F) && !currentPlayer1 && readyToChangePlayer)
         {
+            currentPlayerGameObj = player1;
+            shootingManager.readyToShoot[1] = true;
+
             player1.GetComponent<PlayersMovement>().enabled = true;
             player2.GetComponent<PlayersMovement>().enabled = false;
+
             currentPlayer1 = true;
             readyToChangePlayer = false;
+
             StartCoroutine(PlayerChangeCD());
+
             cdbarScript.AddABar("PlayerChangeCD");
+
             player1.transform.position = player2.transform.position;
             ReplaceP2WithBaricade();
         }
