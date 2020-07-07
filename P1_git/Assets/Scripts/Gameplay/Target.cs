@@ -14,8 +14,12 @@ public class Target : MonoBehaviour
 
     public GameObject hB;
 
+    
+
     private void Start()
     {
+        
+
         gM = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         maxHP = healthPoints;
         healthBarScript = hB.GetComponent<HealthBar>();
@@ -39,4 +43,6 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         Destroy(gM.healthBar);
     }
+
+
 }
