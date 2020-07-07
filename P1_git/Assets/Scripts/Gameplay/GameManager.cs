@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private Target targetScript;
     private HealthBar healthBarScript;
     private ShootingManager shootingManager;
+    private PScript playerScript;
     
 
     public bool currentPlayer1 = true;
@@ -40,14 +41,14 @@ public class GameManager : MonoBehaviour
     public Vector3 rampOffset, enemySpawnPoint;
 
     public float playerChangeCD;
-
-    //private string keyToChangePlayer = "F";
-    // Start is called before the first frame update
+    
     void Start()
     {
         currentPlayerGameObj = player1;
         targetScript = Target.GetComponent<Target>();
         Cursor.visible = false;
+
+        playerScript = currentPlayerGameObj.GetComponent<PScript>();
     }
 
     // Update is called once per frame
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && currentPlayer1 && readyToChangePlayer)
         {
             currentPlayerGameObj = player2;
-            shootingManager.readyToShoot[1] = true;
+            playerScript.readyToShoot[1] = true;
 
             player1.GetComponent<PlayersMovement>().enabled = false;
             player2.GetComponent<PlayersMovement>().enabled = true;
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.F) && !currentPlayer1 && readyToChangePlayer)
         {
             currentPlayerGameObj = player1;
-            shootingManager.readyToShoot[1] = true;
+            playerScript.readyToShoot[1] = true;
 
             player1.GetComponent<PlayersMovement>().enabled = true;
             player2.GetComponent<PlayersMovement>().enabled = false;

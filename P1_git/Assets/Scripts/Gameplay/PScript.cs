@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P1Script: MonoBehaviour
-{/*
+public class PScript : MonoBehaviour
+{
+
     public ShootingManager shootingManager;
 
     public Quaternion hitRotation;
@@ -24,12 +25,14 @@ public class P1Script: MonoBehaviour
     public float pistolShootForse = 100;
 
     private void Update()
-    { 
+    {
     }
 
     private void Start()
     {
         shootingManager = FindObjectOfType<ShootingManager>().GetComponent<ShootingManager>();
+
+        //gunsInHand = new GameObject[4] /*{ laserInHand, pistolInHand, circleInHand, rocketInHand}*/;
 
         guns = new bool[4] { laserGun = false, pistolGun = false, circleGun = false, rocketGun = false };
         for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
@@ -42,7 +45,10 @@ public class P1Script: MonoBehaviour
     {
         Debug.Log("kek");
         if (other.CompareTag("laser"))
+        //if (other.name == "laserGo")
         {
+            //Debug.Log("keklaser");
+            //Debug.Log(guns.Length);
             for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
             for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
             for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false); }
@@ -53,7 +59,9 @@ public class P1Script: MonoBehaviour
         }
 
         if (other.gameObject.CompareTag("pistol"))
+        //if (other.name == "pistolGo")
         {
+            //Debug.Log("kekois");
             for (int i = 0; i < guns.Length; i++) { guns[i] = false; }
             for (int i = 0; i < readyToShoot.Length; i++) { readyToShoot[i] = false; }
             for (int i = 0; i < gunsInHand.Length; i++) { gunsInHand[i].SetActive(false); }
@@ -63,5 +71,6 @@ public class P1Script: MonoBehaviour
             gunsInHand[1].SetActive(true);
         }
 
-    }*/
+    }
 }
+

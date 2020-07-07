@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class GunInHand : MonoBehaviour
 {
+    public GameObject currentPlayer;
+
+    private GameManager managerScript;
+
     public ShootingManager shootingManagerScript;
+    private PScript playerScript;
 
     public bool isColide;
+
+    private void Start()
+    {
+
+
+        currentPlayer = managerScript.currentPlayerGameObj;
+
+        playerScript = currentPlayer.GetComponent<PScript>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Baricade"))
         {
             isColide = true;
-            shootingManagerScript.canShoot = false;
+            playerScript.canShoot = false;
         }
     }
 
@@ -22,7 +36,7 @@ public class GunInHand : MonoBehaviour
         if (other.CompareTag("Baricade"))
         {
             isColide = false;
-            shootingManagerScript.canShoot = true;
+            playerScript.canShoot = true;
         }
     }
 }

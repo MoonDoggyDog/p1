@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CDBarScript : MonoBehaviour
 {
+
+    public GameObject currentPlayer;
+
     private bool[] sequence = new bool[3];
 
     public bool AddLaserShotCDIsKeyDown;
@@ -14,6 +17,7 @@ public class CDBarScript : MonoBehaviour
 
     public GameManager gameManager;
     public ShootingManager shootingManager;
+    private PScript playerScript;
 
     public Vector3 offset;
 
@@ -21,31 +25,29 @@ public class CDBarScript : MonoBehaviour
 
     private void Start()
     {
+        currentPlayer = gameManager.currentPlayerGameObj;
+
+        playerScript = currentPlayer.GetComponent<PScript>();
+
         shootingManager = player1.GetComponent<ShootingManager>();
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         //sequence[] =  {false, false, false};
         //CDBarGameObjects = new GameObject[4];
         for(int i = 0; i < CDBarGameObjects.Length - 1; i++) { CDBarGameObjects[i].SetActive(false); }
-        numAddLaserCD = shootingManager.laserOverLoadCD;
+        numAddLaserCD = playerScript.laserOverLoadCD;
     }
 
     private void Update()
     {
-        if(gameManager.currentPlayer1)
-        {
-            shootingManager = player1.GetComponent<ShootingManager>();
-        }
-        else
-        {
-            shootingManager = player2.GetComponent<ShootingManager>();
-        }
+        shootingManager = currentPlayer.GetComponent<ShootingManager>();
+        
 
 
         AddPlayerChangeCD();
         AddPistolCd();
         AddLaserCD();
 
-        CDBarGameObjects[2].transform.localScale = new Vector3(numAddLaserCD / shootingManager.laserOverLoadCD, 1, 1);
+        CDBarGameObjects[2].transform.localScale = new Vector3(numAddLaserCD / playerScript.laserOverLoadCD, 1, 1);
     }
 
     private void FixedUpdate()
@@ -79,7 +81,7 @@ public class CDBarScript : MonoBehaviour
 
        if (bar == "PistolCD")
        {
-            numAddPistolCd = shootingManager.pistolShootCd;
+            numAddPistolCd = playerScript.pistolShootCd;
             CDBarGameObjects[0].SetActive(true);
        }
 
@@ -113,7 +115,7 @@ public class CDBarScript : MonoBehaviour
         if (numAddPistolCd > 0)
         {
             numAddPistolCd -= Time.deltaTime;
-            CDBarGameObjects[0].transform.localScale = new Vector3(numAddPistolCd / shootingManager.pistolShootCd, 1, 1);
+            CDBarGameObjects[0].transform.localScale = new Vector3(numAddPistolCd / playerScript.pistolShootCd, 1, 1);
         }
         else
         {
@@ -132,7 +134,7 @@ public class CDBarScript : MonoBehaviour
             //AddLaserShotCDIsKeyDown = false;
             StartCoroutine(shootingManager.LaserOverload());
         }
-        if(!AddLaserShotCDIsKeyDown && numAddLaserCD  < shootingManager.laserOverLoadCD)
+        if(!AddLaserShotCDIsKeyDown && numAddLaserCD  < playerScript.laserOverLoadCD)
         {
 
             numAddLaserCD += Time.deltaTime;
