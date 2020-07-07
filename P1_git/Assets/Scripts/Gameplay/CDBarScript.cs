@@ -29,7 +29,7 @@ public class CDBarScript : MonoBehaviour
 
         playerScript = currentPlayer.GetComponent<PScript>();
 
-        shootingManager = player1.GetComponent<ShootingManager>();
+       // shootingManager = player1.GetComponent<ShootingManager>();
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         //sequence[] =  {false, false, false};
         //CDBarGameObjects = new GameObject[4];
@@ -39,10 +39,8 @@ public class CDBarScript : MonoBehaviour
 
     private void Update()
     {
-        shootingManager = currentPlayer.GetComponent<ShootingManager>();
+        //shootingManager = currentPlayer.GetComponent<ShootingManager>();
         
-
-
         AddPlayerChangeCD();
         AddPistolCd();
         AddLaserCD();

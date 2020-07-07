@@ -31,6 +31,8 @@ public class ShootingManager : MonoBehaviour
         cDBarScript = FindObjectOfType<CDBarScript>().GetComponent<CDBarScript>();
 
         lineRenderer = GetComponent<LineRenderer>();
+
+        laserPartToDestroy = Instantiate(laserParticle);
     }
 
     public void LaserShot()
@@ -54,6 +56,9 @@ public class ShootingManager : MonoBehaviour
                     targetScript.TakeDamage(Time.deltaTime * playerScript.laserCurrentDamageDeal);
                 }
             }
+
+           // laserPartToDestroy = Instantiate(laserParticle, hitInfo.point, laserParticle.transform.rotation);
+
             lineRenderer.SetPosition(0, playerScript.FirePoint.transform.position);
             lineRenderer.SetPosition(1, hitInfo.point);
 
@@ -66,6 +71,7 @@ public class ShootingManager : MonoBehaviour
             lineRenderer.SetPosition(0, new Vector3(0, -1, 0));
             lineRenderer.SetPosition(1, new Vector3(0, -1, 0));
             laserPartToDestroy.Stop();
+            //Destroy(laserPartToDestroy, 1);
         }
     }
 
