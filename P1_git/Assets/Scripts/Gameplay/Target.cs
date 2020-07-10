@@ -27,8 +27,9 @@ public class Target : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        //Debug.Log("принято");
+        //Debug.Log(damage);
         healthPoints -= damage;
+
         //healthBarScript.ChangeHP();
         if (healthPoints <= 0)
         {

@@ -25,6 +25,10 @@ public class HealthBar : MonoBehaviour
             scale = sthHP / sthMaxHp;
             HB2.transform.localScale = new Vector3(scale, 1, 1);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /*public void ChangeHP()

@@ -15,25 +15,35 @@ public class GunInHand : MonoBehaviour
 
     private void Start()
     {
+        managerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
 
-
+    private void Update()
+    {
         currentPlayer = managerScript.currentPlayerGameObj;
 
         playerScript = currentPlayer.GetComponent<PScript>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Baricade"))
+        
+    }
+
+    private void OnTriggerStay(Collider collision)
+    {
+        //Debug.Log("колайд");
+        if(collision.gameObject.CompareTag("Baricade"))
         {
             isColide = true;
             playerScript.canShoot = false;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider collision)
     {
-        if (other.CompareTag("Baricade"))
+        //Debug.Log("-колайд");
+        if (collision.gameObject.CompareTag("Baricade"))
         {
             isColide = false;
             playerScript.canShoot = true;

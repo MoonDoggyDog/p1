@@ -30,6 +30,7 @@ public class PScript : MonoBehaviour
 
     private void Start()
     {
+        
         shootingManager = FindObjectOfType<ShootingManager>().GetComponent<ShootingManager>();
 
         //gunsInHand = new GameObject[4] /*{ laserInHand, pistolInHand, circleInHand, rocketInHand}*/;
@@ -43,7 +44,7 @@ public class PScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("kek");
+        //Debug.Log("kek");
         if (other.CompareTag("laser"))
         //if (other.name == "laserGo")
         {

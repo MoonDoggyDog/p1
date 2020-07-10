@@ -48,11 +48,12 @@ public class ShootingManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                //Debug.Log(hitInfo.transform.name);
+               // Debug.Log(hitInfo.transform.name);
 
-                Target targetScript = hitInfo.transform.GetComponent<Target>();
+                Target targetScript = hitInfo.transform.gameObject.GetComponent<Target>();
                 if (targetScript != null)
                 {
+                  //  Debug.Log("DAmage dealing " + Time.deltaTime * playerScript.laserCurrentDamageDeal);
                     targetScript.TakeDamage(Time.deltaTime * playerScript.laserCurrentDamageDeal);
                 }
             }
