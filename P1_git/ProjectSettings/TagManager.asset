@@ -10,6 +10,8 @@ TagManager:
   - Target
   - laser
   - pistol
+  - VievField
+  - player
   layers:
   - Default
   - TransparentFX

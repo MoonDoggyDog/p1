@@ -73,5 +73,14 @@ public class PScript : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("VievField"))
+        {
+            //Debug.Log(other.gameObject.transform.parent.parent.name);
+            other.gameObject.transform.parent.parent.GetComponent<Enemy>().PlayerInViev(transform);
+        }
+    }
 }
 
