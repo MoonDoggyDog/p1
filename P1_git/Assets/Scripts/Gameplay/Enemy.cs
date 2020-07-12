@@ -11,12 +11,10 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
 
-    public bool moveToPlayer = false;
-
-    public bool moveToPathPoint = true;
-
     public Vector3 rayOffset;
-    public Vector3 rayOriginOffset ;
+    public Vector3 rayOriginOffset;
+
+    public float meleeAtackRange;
 
     private void Start()
     {
@@ -29,18 +27,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = gameManager.currentPlayerGameObj.transform;
 
-        Movement();
+        player = gameManager.currentPlayerGameObj.transform;
     }
 
-    private void Movement()
+    private void Movement(string whatToDo)
     {
-        if (moveToPlayer)
+        if (whatToDo == "MoveToPlayer")
         {
             navMeshAgent.destination = player.position;
         }
-        else if(moveToPathPoint)
+        else if(whatToDo == "moveToPathPoint")
         {
 
         }
@@ -50,13 +47,30 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit raycastHit;
 
-        Ray ray = new Ray (transform.position + rayOriginOffset, player.transform.position - rayOffset);
+        Ray ray = new Ray (transform.position, player.transform.position - transform.position );
 
-        if (Physics.Raycast(ray, out raycastHit, 2))
+        if (Physics.Raycast(ray, out raycastHit))
         {
-            Debug.Log(raycastHit.transform.name);
+            //Debug.Log(raycastHit.transform.name);
+            if (raycastHit.transform.name == "Player1")
+            {
+                //Debug.Log(player.transform.position);
+                if (raycastHit.distance < 15)
+                {
+                    Movement("MoveToPlayer");
+                }
+                else if (raycastHit.distance >= 15)
+                {
+                    Shoot();
+                }
+            }
         }
 
-        Debug.DrawRay(transform.position + rayOriginOffset, player.transform.position - rayOffset);
+        Debug.DrawRay(transform.position, player.transform.position - transform.position);
+    }
+
+    public void Shoot()
+    {
+
     }
 }
