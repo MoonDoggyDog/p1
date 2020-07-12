@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject sword;
+    public GameObject bazooka;
+
     private GameManager gameManager;
 
     private Transform player;
@@ -15,6 +18,9 @@ public class Enemy : MonoBehaviour
     public Vector3 rayOriginOffset;
 
     public float meleeAtackRange;
+    public float bazookaForse;
+
+    public bool enemyReadyToShot;
 
     private void Start()
     {
@@ -54,14 +60,15 @@ public class Enemy : MonoBehaviour
             //Debug.Log(raycastHit.transform.name);
             if (raycastHit.transform.name == "Player1")
             {
-                //Debug.Log(player.transform.position);
+                Debug.Log(raycastHit.distance);
                 if (raycastHit.distance < 15)
                 {
+                    sword.SetActive(true);
                     Movement("MoveToPlayer");
                 }
-                else if (raycastHit.distance >= 15)
+                else if (raycastHit.distance >= 15 && enemyReadyToShot)
                 {
-                    Shoot();
+                    StartCoroutine(Shoot());
                 }
             }
         }
@@ -69,8 +76,17 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(transform.position, player.transform.position - transform.position);
     }
 
-    public void Shoot()
+    /*public void Shoot()
     {
+        bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);
+    }*/
 
+    IEnumerator Shoot()
+    {
+        Debug.Log("sus");
+        enemyReadyToShot = false;
+        bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);
+        yield return new WaitForSeconds(2);
+        enemyReadyToShot = true;
     }
 }

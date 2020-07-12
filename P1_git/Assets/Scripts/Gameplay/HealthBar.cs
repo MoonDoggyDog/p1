@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     private float sthHP;
     private float sthMaxHp;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (sthToFollow)
         {

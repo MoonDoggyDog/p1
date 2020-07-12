@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameManager gameManager;
+
     public Vector3 offset;
+
     public Transform p1transform;
     public Transform p2transform;
 
