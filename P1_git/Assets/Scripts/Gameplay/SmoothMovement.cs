@@ -12,6 +12,7 @@ public class SmoothMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log(toFollow.position);
         Vector3 toFollowPos = toFollow.position + offset;
         Vector3 smoothPos = Vector3.Lerp(transform.position, toFollowPos, smoothnesSpeed);
         transform.position = smoothPos;

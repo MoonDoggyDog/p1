@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameObject enemy = Instantiate(enemyPrefabCube, enemySpawnPoint, enemyPrefabCube.transform.rotation);
+
             healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemy.transform;
         }
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameObject enemyprism = Instantiate(enemyPrefabPrism, enemySpawnPoint, enemyPrefabPrism.transform.rotation);
+
             healthBar = Instantiate(HBPrefab, enemySpawnPoint, HBPrefab.transform.rotation);
             healthBar.GetComponent<HealthBar>().sthToFollow = enemyprism.transform;
         }

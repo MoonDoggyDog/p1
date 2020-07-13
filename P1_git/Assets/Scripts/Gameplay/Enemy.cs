@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     public bool enemyReadyToShot;
 
+    public Animation bazookaShot;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
@@ -60,7 +62,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log(raycastHit.transform.name);
             if (raycastHit.transform.name == "Player1")
             {
-                Debug.Log(raycastHit.distance);
+               // Debug.Log(raycastHit.distance);
                 if (raycastHit.distance < 15)
                 {
                     sword.SetActive(true);
@@ -83,9 +85,10 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        Debug.Log("sus");
+        //Debug.Log("sus");
+        //bazooka.
         enemyReadyToShot = false;
-        bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);
+        //bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);
         yield return new WaitForSeconds(2);
         enemyReadyToShot = true;
     }
