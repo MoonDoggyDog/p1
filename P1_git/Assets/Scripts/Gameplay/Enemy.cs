@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public float bazookaForse;
 
     public bool enemyReadyToShot;
+    public bool moveToPlayer;
 
     public Animation bazookaShot;
 
@@ -35,6 +36,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(moveToPlayer)
+        {
+            Movement("MoveToPlayer");
+        }
 
         player = gameManager.currentPlayerGameObj.transform;
     }
@@ -60,10 +65,10 @@ public class Enemy : MonoBehaviour
         if (Physics.Raycast(ray, out raycastHit))
         {
             //Debug.Log(raycastHit.transform.name);
-            if (raycastHit.transform.name == "Player1")
+            if (raycastHit.transform.name == "Player1" | raycastHit.transform.name == "Player2" )
             {
                // Debug.Log(raycastHit.distance);
-                if (raycastHit.distance < 15)
+                if ( raycastHit.distance < 15 /*&& raycastHit.distance > 3*/)
                 {
                     sword.SetActive(true);
                     Movement("MoveToPlayer");
@@ -78,14 +83,9 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(transform.position, player.transform.position - transform.position);
     }
 
-    /*public void Shoot()
-    {
-        bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);
-    }*/
-
     IEnumerator Shoot()
     {
-        //Debug.Log("sus");
+        Debug.Log("BUM");
         //bazooka.
         enemyReadyToShot = false;
         //bazooka.GetComponent<Rigidbody>().AddForce(-transform.forward * bazookaForse, ForceMode.Impulse);

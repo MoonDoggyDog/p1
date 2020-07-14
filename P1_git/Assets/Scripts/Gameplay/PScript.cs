@@ -82,5 +82,21 @@ public class PScript : MonoBehaviour
             other.gameObject.transform.parent.parent.GetComponent<Enemy>().PlayerInViev(transform);
         }
     }
+
+   /* private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("VievField"))
+        {
+            StartCoroutine(MovetoPlayerAnyway( other.gameObject.GetComponent<Enemy>().moveToPlayer));
+        }
+    }
+
+    IEnumerator MovetoPlayerAnyway( bool mtp)
+    {
+        mtp = true;
+        yield return new WaitForSeconds(0.4f);
+        mtp = false;
+        Debug.Log("шышамба");
+    }*/
 }
 
